@@ -10,7 +10,7 @@ RUN sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/
 RUN yum install make python36 python36-devel zip unzip gcc git wget -y
 RUN yum clean all
 RUN useradd noroot -u 1000 -s /bin/bash
-RUN chmod -R ug+rwx /home/noroot
+RUN chmod -R ugo+rwx /home/noroot
 COPY requirements.txt /home/noroot
 RUN pip3 --no-cache-dir install --trusted-host mirrors.aliyun.com -i http://mirrors.aliyun.com/pypi/simple/ -r /home/noroot/requirements.txt --user
 USER noroot
