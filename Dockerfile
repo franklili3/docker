@@ -1,18 +1,20 @@
 # Version 0.0.1
 FROM centos
-MAINTAINER Zero <admin@botvs.com>
+MAINTAINER frank <348104201@qq.com>
 LABEL Description="This image is used for botvs sandbox"
 # install cross compiler
 RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-RUN curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo && yum clean all && yum makecache
-RUN yum install make python python-devel python-setuptools tkinter zip unzip gcc git blas-devel lapack-devel -y
-RUN curl -L --retry 100 http://q.botvs.net/pkg/ta-lib-0.4.0-src.tar.gz | tar xvz
-RUN cd ta-lib && ./configure --prefix=/usr/ --libdir=/lib64 && make && make install && cd ../ && rm -rf ta-lib
-RUN easy_install -i http://mirrors.aliyun.com/pypi/simple/ pip
-RUN pip --no-cache-dir install --trusted-host mirrors.aliyun.com -i http://mirrors.aliyun.com/pypi/simple/ numpy TA-Lib
-RUN pip --no-cache-dir install --trusted-host mirrors.aliyun.com -i http://mirrors.aliyun.com/pypi/simple/ statsmodels scikit-learn hmmlearn pykalman arch matplotlib
-#RUN curl -L --retry 100 https://dn-botvs.qbox.me/v321/robot_linux_amd64.tar.gz | tar -C /usr/local/sbin/ -xvz
+RUN curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-8.repo && yum clean all && yum makecache
+RUN sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/CentOS-Base.repo
+# install python3.6
+RUN yum install make python36 python36-devel zip unzip gcc git wget -y
 RUN yum clean all
-RUN useradd noroot -u 1000 -s /bin/bash --no-create-home
+RUN useradd noroot -u 1000 -s /bin/bash
+RUN chmod -R ug+rwx /home/noroot
+COPY requirements.txt /home/noroot
+RUN pip3 --no-cache-dir install --trusted-host mirrors.aliyun.com -i http://mirrors.aliyun.com/pypi/simple/ -r /home/noroot/requirements.txt --user
 USER noroot
-
+WORKDIR /home/noroot
+RUN wget https://www.fmz.com/dist/robot_linux_amd64.tar.gz
+RUN tar -xvzf robot_linux_amd64.tar.gz
+RUN git clone https://github.com/franklili3/pyfolio.git
