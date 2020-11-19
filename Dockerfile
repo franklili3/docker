@@ -7,7 +7,7 @@ RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backu
 RUN curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-8.repo && yum clean all && yum makecache
 RUN sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/CentOS-Base.repo
 # install python3.6
-RUN yum install sudo make python36 python36-devel zip unzip gcc git wget vixie-cron crontabs -y
+RUN yum install sudo make python36 python36-devel zip unzip gcc git wget vixie-cron -y
 RUN yum clean all
 RUN sudo ln -s /usr/bin/python3.6 /usr/bin/python
 RUN useradd noroot -u 1000 -s /bin/bash
