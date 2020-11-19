@@ -19,3 +19,5 @@ WORKDIR /home/noroot
 RUN wget https://www.fmz.com/dist/robot_linux_amd64.tar.gz
 RUN tar -xvzf robot_linux_amd64.tar.gz
 RUN git clone https://github.com/franklili3/pyfolio.git
+ADD start.sh ./
+CMD ["/bin/bash","./start.sh"]
