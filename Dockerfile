@@ -1,6 +1,6 @@
 # Version 0.0.1
 FROM centos:8.0
-AUTHOR frank <348104201@qq.com>
+MAINTAINER frank <348104201@qq.com>
 LABEL Description="This image is used for botvs sandbox"
 # install cross compiler
 RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
