@@ -1,5 +1,5 @@
 # Version 0.0.1
-FROM centos:centos7.9.2009
+FROM centos:centos8
 MAINTAINER frank <348104201@qq.com>
 LABEL Description="This image is used for botvs sandbox"
 # install cross compiler
