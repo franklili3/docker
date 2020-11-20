@@ -9,7 +9,7 @@ RUN sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/
 # install python3.6
 RUN yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
 RUN yum update -y
-RUN yum install sudo make python36 python36-devel zip unzip gcc git wget vixie-cron -y
+RUN yum install sudo make python36 python36-devel zip unzip gcc git wget -y
 RUN yum clean all
 RUN sudo ln -s /usr/bin/python3.6 /usr/bin/python
 RUN useradd noroot -u 1000 -s /bin/bash
@@ -21,5 +21,4 @@ WORKDIR /home/noroot
 RUN wget https://www.fmz.com/dist/robot_linux_amd64.tar.gz
 RUN tar -xvzf robot_linux_amd64.tar.gz
 RUN git clone https://github.com/franklili3/pyfolio.git
-ADD start.sh ./
-CMD ["/bin/bash","./start.sh"]
+CMD ["nohup", "./robot", "-s", "node.fmz.com/$id", "-p", "$password", "&"]
