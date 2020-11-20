@@ -1,5 +1,5 @@
 # Version 0.0.1
-FROM centos
+FROM centos:centos8
 MAINTAINER frank <348104201@qq.com>
 LABEL Description="This image is used for botvs sandbox"
 # install cross compiler
@@ -7,7 +7,9 @@ RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backu
 RUN curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-8.repo && yum clean all && yum makecache
 RUN sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/CentOS-Base.repo
 # install python3.6
-RUN yum install sudo make python36 python36-devel zip unzip gcc git wget -y
+RUN yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+RUN yum update -y
+RUN yum install sudo make python36 python36-devel zip unzip gcc git wget vixie-cron -y
 RUN yum clean all
 RUN sudo ln -s /usr/bin/python3.6 /usr/bin/python
 RUN useradd noroot -u 1000 -s /bin/bash
@@ -19,3 +21,5 @@ WORKDIR /home/noroot
 RUN wget https://www.fmz.com/dist/robot_linux_amd64.tar.gz
 RUN tar -xvzf robot_linux_amd64.tar.gz
 RUN git clone https://github.com/franklili3/pyfolio.git
+ADD start.sh ./
+CMD ["/bin/bash","./start.sh"]
