@@ -9,7 +9,7 @@ LABEL Description="This image is used for fmz robot"
 #RUN curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-8.repo && yum clean all && yum makecache
 #RUN sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/CentOS-Base.repo
 # install python3.6
-RUN yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+#RUN yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
 RUN yum update -y
 RUN yum install sudo make python36 python36-devel zip unzip gcc git wget -y
 RUN yum clean all
