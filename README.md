@@ -1,7 +1,5 @@
 # fmz robot for docker
 ```
 docker build -q=false -t="fmz/docker" .
-export id=XXX
-export password=XXX
-docker run --name=fmz/robot fmz/docker
+docker run --name=fmz/robot -d fmz/docker nohup ./robot -s node.fmz.com/XXX -p XXX &
 ```

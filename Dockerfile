@@ -13,14 +13,14 @@ LABEL Description="This image is used for fmz robot"
 RUN yum update -y
 RUN yum install sudo make python36 python36-devel zip unzip gcc git wget -y
 RUN yum clean all
+RUN sudo rm /usr/bin/python
 RUN sudo ln -s /usr/bin/python3.6 /usr/bin/python
 RUN useradd noroot -u 1000 -s /bin/bash
 RUN chmod -R ugo+rwx /home/noroot
 COPY requirements.txt /home/noroot
-RUN pip3 --no-cache-dir install --trusted-host mirrors.aliyun.com -i http://mirrors.aliyun.com/pypi/simple/ -r /home/noroot/requirements.txt --user
 USER noroot
+RUN pip3 --no-cache-dir install --trusted-host mirrors.aliyun.com -i http://mirrors.aliyun.com/pypi/simple/ -r /home/noroot/requirements.txt --user
 WORKDIR /home/noroot
 RUN wget https://www.fmz.com/dist/robot_linux_amd64.tar.gz
 RUN tar -xvzf robot_linux_amd64.tar.gz
-RUN git clone https://github.com/franklili3/pyfolio.git
-CMD ["nohup", "./robot", "-s", "node.fmz.com/$id", "-p", "$password", "&"]
+RUN git clone https://gitee.com/franklili/pyfolio.git
