@@ -11,7 +11,7 @@ LABEL Description="This image is used for fmz robot"
 # install python3.6
 #RUN yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
 RUN yum update -y
-RUN yum install sudo make python36 python36-devel zip unzip gcc git wget -y
+RUN yum install sudo make python36 python36-devel zip unzip gcc git wget nodejs -y
 RUN yum clean all
 RUN sudo rm /usr/bin/python
 RUN sudo ln -s /usr/bin/python3.6 /usr/bin/python
