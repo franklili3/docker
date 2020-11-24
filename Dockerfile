@@ -11,7 +11,10 @@ LABEL Description="This image is used for fmz robot"
 # install python3.6
 #RUN yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
 RUN yum update -y
-RUN yum install sudo make python36 python36-devel zip unzip gcc git wget nodejs -y
+RUN yum clean all && yum makecache fast
+RUN yum install -y sudo gcc-c++ make
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
+RUN yum install python36 python36-devel zip unzip git wget nodejs -y
 RUN yum clean all
 RUN sudo rm /usr/bin/python
 RUN sudo ln -s /usr/bin/python3.6 /usr/bin/python
@@ -24,3 +27,6 @@ WORKDIR /home/noroot
 RUN wget https://www.fmz.com/dist/robot_linux_amd64.tar.gz
 RUN tar -xvzf robot_linux_amd64.tar.gz
 RUN git clone https://gitee.com/franklili/pyfolio.git
+WORKDIR /home/noroot/pyfolio
+RUN git pull
+WORKDIR /home/noroot
