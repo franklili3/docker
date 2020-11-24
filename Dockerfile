@@ -26,7 +26,7 @@ RUN pip3 --no-cache-dir install --trusted-host mirrors.aliyun.com -i http://mirr
 WORKDIR /home/noroot
 RUN wget https://www.fmz.com/dist/robot_linux_amd64.tar.gz
 RUN tar -xvzf robot_linux_amd64.tar.gz
-RUN git clone https://gitee.com/franklili/pyfolio.git
-WORKDIR /home/noroot/pyfolio
-RUN git pull
-WORKDIR /home/noroot
+#RUN git clone https://github.com/franklili3/pyfolio.git
+#WORKDIR /home/noroot/pyfolio
+#RUN git pull
+#WORKDIR /home/noroot
