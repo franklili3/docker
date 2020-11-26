@@ -18,7 +18,7 @@ RUN yum install python36 python36-devel zip unzip git wget nodejs -y
 RUN yum clean all
 RUN sudo rm /usr/bin/python
 RUN sudo ln -s /usr/bin/python3.6 /usr/bin/python
-RUN useradd noroot -u 1000 -s /bin/bash
+RUN useradd noroot -u 10003 -s /bin/bash
 RUN chmod -R ugo+rwx /home/noroot
 COPY requirements.txt /home/noroot
 USER noroot
