@@ -10,11 +10,10 @@ RUN yum install sudo gcc-c++ make python36 python36-devel zip unzip git wget -y
 RUN yum clean all
 RUN sudo rm /usr/bin/python
 RUN sudo ln -s /usr/bin/python3.6 /usr/bin/python
-RUN useradd noroot -u 10003 -s /bin/bash
-RUN chmod -R ugo+rwx /home/noroot
+RUN sudo mkdir /home/noroot
+RUN chmod 777 /home/noroot
 COPY requirements.txt /home/noroot
-USER noroot
-RUN pip3 --no-cache-dir install --user --trusted-host mirrors.aliyun.com -i http://mirrors.aliyun.com/pypi/simple/ -r /home/noroot/requirements.txt
+RUN sudo pip3 --no-cache-dir install --trusted-host mirrors.aliyun.com -i http://mirrors.aliyun.com/pypi/simple/ -r /home/noroot/requirements.txt
 WORKDIR /home/noroot
 RUN wget https://www.fmz.com/dist/robot_linux_amd64.tar.gz
 RUN tar -xvzf robot_linux_amd64.tar.gz
