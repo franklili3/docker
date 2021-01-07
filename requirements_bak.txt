@@ -3,7 +3,7 @@ certifi==2020.6.20
 chardet==3.0.4
 empyrical==0.5.5
 idna==2.10
-lxml==4.6.1
+lxml==4.6.2
 numpy==1.15.4
 pandas==0.25
 pandas-datareader==0.9.0
